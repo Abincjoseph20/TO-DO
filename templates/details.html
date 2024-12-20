@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">current status</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong>Event:</strong> {{ fom.event }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Status:</strong> {% if fom.completed %}Completed{% else %}Pending{% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 600px;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+    }
+
+    .card-title {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .list-group-item {
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+    }
+</style>
+{% endblock content %}

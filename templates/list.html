@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">List here</h2>
+    <ul class="list-group">
+        {% for todo in todos %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'details' todo.pk %}" class="flex-grow-1">{{ todo.event }} - {% if todo.completed %}Completed{% else %}Pending{% endif %}</a>
+                <form method="post" action="{% url 'update' todo.pk %}" class="form-inline ml-2">
+                    {% csrf_token %}
+                    <div class="form-group mr-2">
+                        <input type="text" name="event" class="form-control" value="{{ todo.event }}" required>
+                    </div>
+                    <div class="form-group mr-2">
+                        <input type="checkbox" name="completed" {% if todo.completed %}checked{% endif %} class="form-check-input">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                </form>
+                <form method="post" action="{% url 'delete' todo.pk %}" class="ml-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="text-center mt-3"> <!-- Centering and margin-top for spacing -->
+        <a href='{% url 'create' %}' class="btn btn-secondary btn-sm">Create your todo</a> <!-- Small button with proper padding -->
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 700px; /* Set maximum width for the container */
+    }
+
+    h2 {
+        text-align: center; /* Center align the heading */
+    }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .btn-sm {
+        margin-left: 10px;
+    }
+
+    .text-center {
+        text-align: center; /* Center align text inside this container */
+        margin-top: 20px; /* Margin top for spacing */
+    }
+
+    .btn-secondary {
+        padding: 5px 10px; /* Custom padding for the small button */
+    }
+</style>
+{% endblock content %}

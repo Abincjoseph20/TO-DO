@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Make your list</h2>
+    <form method='post' enctype='multipart/form-data' class="needs-validation" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    </form>
+    <div class="text-center">
+        <a href='{% url 'list' %}' class="btn btn-secondary btn-sm">List</a>
+    </div>
+</div>
+
+<style>
+    /* Add any additional custom styles here */
+    .container {
+        max-width: 600px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    form {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(81, 22, 22, 0.1);
+        margin-bottom: 20px; /* Added margin bottom to space form from button */
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+    }
+
+    .btn-secondary {
+        display: inline-block;
+        width: auto;
+        padding: 10px 50px; /* Custom padding for the small button */
+        margin-top: 10px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+{% endblock content %}
+
+
